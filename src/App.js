@@ -4,8 +4,22 @@ import './App.css';
 
 
 axios.get('https://api.github.com/users/MaryamMosstoufi')
-.then(response => {
-  console.log(response)
+  .then(response => {
+    //get user api response
+    console.log('user api response', response)
+    
+    // get followers api url
+    console.log('followers api url', response.data.followers_url);
+
+    axios.get(response.data.followers_url)
+      .then(response => {
+        // get followers api response
+        console.log('followers api response',response.data);
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      })
+
   })
   .catch(error => {
     console.log("Error:", error);
